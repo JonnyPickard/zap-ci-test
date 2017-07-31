@@ -1,0 +1,17 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+  - stable
+before_install:
+  - sudo apt-get install oracle-java8-set-default
+  - wget -q -O /etc/init.d/zap https://raw.githubusercontent.com/stelligent/zap/master/packer/roles/zap/files/zap-init.sh
+chmod 755 /etc/init.d/zap
+  - mkdir -p zap/roles/zap{tasks,defaults,files}
+  -wget -q -O zap/roles/zap/files/zap-init.sh https://raw.githubusercontent.com/stelligent/zap/master/packer/roles/zap/files/zap-init.sh
+before_script:
+  - /etc/init.d/zap start
+env:
+  - NODE_ENV=test
+script:
+- npm start
