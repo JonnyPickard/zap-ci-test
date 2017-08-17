@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  testapp:
+    build: .
+    container_name: testapp
+    ports:
+      - "3000:3000"
+  zap:
+    build:
+      context: .
+      dockerfile: Dockerfile-zap
+    depends_on:
+      - testapp
